@@ -1,0 +1,68 @@
+[
+  {
+    "model": "users.user",
+    "pk": 1,
+    "fields": {
+      "password": "pbkdf2_sha256$720000$LjSrupEdIihvd29pgrcmwg$XdsHoudpBAlXOQwaj3QNV6lEEmv+nV1o+dV+FXCJnE0=",
+      "last_login": "2024-06-19T10:33:13.513Z",
+      "is_superuser": true,
+      "username": "",
+      "first_name": "",
+      "last_name": "",
+      "is_staff": true,
+      "is_active": true,
+      "date_joined": "2024-06-19T10:28:10.377Z",
+      "email": "admin@example.com",
+      "phone": null,
+      "city": null,
+      "avatar": "",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": 3,
+    "fields": {
+      "password": "123",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "pleshkovaanastasia",
+      "first_name": "",
+      "last_name": "���������",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2024-06-19T10:36:12Z",
+      "email": "Anastasia.pleshkova2@yandex.ru",
+      "phone": "89222222222",
+      "city": null,
+      "avatar": "",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "users.payment",
+    "pk": 1,
+    "fields": {
+      "user": 1,
+      "date_of_payment": "2024-06-19T10:36:02.659Z",
+      "paid_course": 2,
+      "paid_lesson": 1,
+      "payment_amount": 1500,
+      "payment_method": "Cash"
+    }
+  },
+  {
+    "model": "users.payment",
+    "pk": 2,
+    "fields": {
+      "user": 3,
+      "date_of_payment": "2024-06-19T10:37:30.022Z",
+      "paid_course": 2,
+      "paid_lesson": 2,
+      "payment_amount": 2000,
+      "payment_method": "Non-cash"
+    }
+  }
+]
