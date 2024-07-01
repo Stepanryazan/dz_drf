@@ -6,7 +6,8 @@ NULLABLE = {"blank": True, "null": True}
 
 
 class Course(models.Model):
-    """Модель курса"""
+    """Model for course"""
+
     name = models.CharField(
         max_length=100,
         verbose_name="Название курса",
@@ -30,11 +31,15 @@ class Course(models.Model):
 
     def __str__(self):
         return self.name
+
     class Meta:
         verbose_name = "Курс"
         verbose_name_plural = "Курсы"
+
+
 class Lesson(models.Model):
-    """Модель урока"""
+    """Model for a lesson"""
+
     name = models.CharField(
         max_length=100,
         verbose_name="Название урока",
@@ -56,8 +61,6 @@ class Lesson(models.Model):
         verbose_name="Курс",
         help_text="Выбирете курс",
     )
-    url = models.URLField(
-        verbose_name="Ссылка на видео", **NULLABLE)
     url = models.URLField(verbose_name="Ссылка на видео", **NULLABLE)
     owner = models.ForeignKey(
         to=settings.AUTH_USER_MODEL,
@@ -68,6 +71,31 @@ class Lesson(models.Model):
 
     def __str__(self):
         return f"{self.name}, курс - {self.course}"
+
     class Meta:
         verbose_name = "Урок"
         verbose_name_plural = "Уроки"
+
+
+class Subscription(models.Model):
+    """Model for subscription"""
+
+    user = models.ForeignKey(
+        to=settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        verbose_name="Пользователь",
+        help_text="Выберите пользователя",
+    )
+    course = models.ForeignKey(
+        Course,
+        on_delete=models.CASCADE,
+        verbose_name="Курс",
+        help_text="Выберите курс",
+    )
+
+    def __str__(self):
+        return f"{self.user} - {self.course}"
+
+    class Meta:
+        verbose_name = "Подписка"
+        verbose_name_plural = "Подписки"
