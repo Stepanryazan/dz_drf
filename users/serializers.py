@@ -15,6 +15,3 @@ class UserSerializer(ModelSerializer):
     class Meta:
         model = User
         fields = '__all__'
-
-    def get_payment_history(self, instance):
-        return PaymentSerializer(instance.payment_history, many=True).data
