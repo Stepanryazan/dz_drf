@@ -84,21 +84,10 @@ class LessonDestroyAPIView(DestroyAPIView):
 
 class SubscriptionAPIView(APIView):
     serializer_class = SubscriptionSerializer
-    permission_classes = [IsAuthenticated, IsOwner]
+    permission_classes = [IsAuthenticated, IsModerator]
 
-    def post(self, *args, **kwargs):
-        """Get response depending on the action"""
-        user = self.request.user
-        course_id = self.request.data.get('course')
-        course_item = get_object_or_404(Course, pk=course_id)
-        subs_item = Subscription.objects.filter(user=user, course=course_item)
-        # If the user has a subscription to this course, we delete it
-        if subs_item.exists():
-            subs_item.delete()
-            message = 'Подписка удалена'
-        # If the user does not have a subscription to this course, we create it
-        else:
-            Subscription.objects.create(user=user, course=course_item)
-            message = 'Подписка добавлена'
-        # Returning the response to the API
-        return Response({"message": message})
+    def post(self, request, *args, **kwargs):
+        serializer = SubscriptionSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+
+        course = serializer.validated_data['course']
