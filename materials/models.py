@@ -95,10 +95,6 @@ class Subscription(models.Model):
         verbose_name="Курс",
         help_text="Выберите курс",
     )
-    status = models.BooleanField(
-        default=True,
-        verbose_name="Cтатус подписки",
-        **NULLABLE)
 
     def __str__(self):
         return f"{self.user} - {self.course}"

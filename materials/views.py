@@ -102,10 +102,22 @@ class LessonDestroyAPIView(DestroyAPIView):
     queryset = Lesson.objects.all()
     permission_classes = [IsAuthenticated, ~IsModerator | IsOwner]
 
+
+class SubscriptionAPIView(APIView):
+    serializer_class = SubscriptionSerializer
+    #permission_classes = [IsAuthenticated]
+
     def post(self, request, *args, **kwargs):
-        serializer = SubscriptionSerializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
+        user = self.request.user
+        course_id = self.request.data.get("course")
+        course_item = get_object_or_404(Course, pk=course_id)
 
-        course = serializer.validated_data["course"]
+        subscription, created = Subscription.objects.get_or_create(user=user, course=course_item)
+        if not created:
+            subscription.delete()
+            message = 'Subscription removed'
+        else:
+            message = 'Subscription added'
 
+        return Response({"message": message})
 
