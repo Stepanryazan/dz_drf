@@ -2,12 +2,22 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.viewsets import ModelViewSet
-from rest_framework.generics import CreateAPIView, ListAPIView, RetrieveAPIView, UpdateAPIView, DestroyAPIView, \
-    get_object_or_404
+from rest_framework.generics import (
+    CreateAPIView,
+    ListAPIView,
+    RetrieveAPIView,
+    UpdateAPIView,
+    DestroyAPIView,
+    get_object_or_404,
+)
 
 from materials.models import Course, Lesson, Subscription
 from materials.paginators import CustomPagination
-from materials.serializers import CourseSerializer, LessonSerializer, SubscriptionSerializer
+from materials.serializers import (
+    CourseSerializer,
+    LessonSerializer,
+    SubscriptionSerializer,
+)
 from users.permissions import IsModerator, IsOwner
 
 
@@ -31,11 +41,11 @@ class CourseViewSet(ModelViewSet):
 
     def get_permissions(self):
         """Get the permissions"""
-        if self.action in ['update', 'partial_update', 'list', 'retrieve']:
+        if self.action in ["update", "partial_update", "list", "retrieve"]:
             self.permission_classes = [IsAuthenticated, IsModerator | IsOwner]
-        if self.action == 'create':
+        if self.action == "create":
             self.permission_classes = [IsAuthenticated, ~IsModerator]
-        if self.action == 'destroy':
+        if self.action == "destroy":
             self.permission_classes = [IsAuthenticated, ~IsModerator | IsOwner]
         return super().get_permissions()
 
@@ -90,4 +100,4 @@ class SubscriptionAPIView(APIView):
         serializer = SubscriptionSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
 
-        course = serializer.validated_data['course']
+        course = serializer.validated_data["course"]

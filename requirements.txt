@@ -9,3 +9,6 @@ sqlparse==0.4.4
 django-filter==24.2
 simplejwt
 coverage
+drf-yasg
+django-cors-headers
+requests
