@@ -12,3 +12,6 @@ coverage
 drf-yasg
 django-cors-headers
 requests
+redis
+celery
+django-celery-beat
