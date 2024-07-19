@@ -1,6 +1,7 @@
 from django.utils import timezone
 from datetime import *
 
+from rest_framework import generics
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -103,9 +104,9 @@ class LessonDestroyAPIView(DestroyAPIView):
     permission_classes = [IsAuthenticated, ~IsModerator | IsOwner]
 
 
-class SubscriptionAPIView(APIView):
+class SubscriptionCreateAPIView(generics.CreateAPIView):
     serializer_class = SubscriptionSerializer
-    #permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated, ~IsModerator]
 
     def post(self, request, *args, **kwargs):
         user = self.request.user
