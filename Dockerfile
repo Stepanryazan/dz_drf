@@ -5,7 +5,7 @@ WORKDIR /app
 RUN pip install --upgrade pip \
     && pip install poetry
 
-COPY poetry.lock pyproject.toml /app/
+COPY requirements.txt /app/
 
 RUN poetry config virtualenvs.create false \
     && poetry install --no-root
