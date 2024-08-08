@@ -15,6 +15,6 @@ requests==2.32.3
 redis==5.1.0b7
 celery==5.4.0
 django-celery-beat==2.6.0
-setuptools==59.6.0
+setuptools
 stripe==10.3.0
 eventlet==0.36.1
